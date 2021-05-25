@@ -1,0 +1,9 @@
+.order-btn {
+    display: block;
+    margin-top: 20px;
+}
+
+.main {
+    min-height: 100vh;
+    overflow: auto;
+}
