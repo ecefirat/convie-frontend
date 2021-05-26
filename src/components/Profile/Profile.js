@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { css } from "@emotion/core";
 // import { jsx } from "@emotion/react";
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
+import { config } from "../../constants";
 
 // Can be a string as well. Need to ensure each key-value pair ends with ;
 const override = css`
@@ -27,8 +28,10 @@ function Profile() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [fileTypeError, setFileTypeError] = useState(false);
 
+  const url = config.url;
+
   useEffect(() => {
-    fetch("http://localhost:5000/sessionInfo", {
+    fetch(url.url_sessionInfo, {
       method: "GET",
       body: JSON.stringify(),
       headers: {
@@ -59,7 +62,7 @@ function Profile() {
   const handleAddress = (data) => {
     console.log(data);
     console.log("handleaddress");
-    fetch("http://localhost:5000/customerAddress", {
+    fetch(url.url_customerAddress, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -85,7 +88,7 @@ function Profile() {
     formData.append("picture", data.picture[0]);
     console.log(formData);
 
-    fetch("http://localhost:5000/picture", {
+    fetch(url.url_picture, {
       method: "POST",
       body: formData,
       credentials: "include",
@@ -98,8 +101,9 @@ function Profile() {
         setFileTypeError(false);
         res.json().then((data) => {
           console.log(data);
-          const newImagePath =
-            "http://localhost:5000/uploads/" + data.picture.name;
+          // const newImagePath =
+          //   "http://localhost:5000/uploads/" + data.picture.name;
+          const newImagePath = url.url_uploads + "/" + data.picture.name;
           console.log(newImagePath);
           setImagePath(newImagePath);
         });
@@ -111,7 +115,7 @@ function Profile() {
     setProfilePicture(data.profile_picture);
     console.log(data);
     console.log("changeimage");
-    fetch("http://localhost:5000/uploads", {
+    fetch(url.url_uploads, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -132,7 +136,7 @@ function Profile() {
   };
 
   const deleteAccount = (data) => {
-    fetch("http://localhost:5000/account", {
+    fetch(url.url_account, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -153,7 +157,7 @@ function Profile() {
   };
 
   const handleLogout = () => {
-    fetch("http://localhost:5000/logout", {
+    fetch(url.url_logout, {
       method: "GET",
       body: JSON.stringify(),
       headers: {

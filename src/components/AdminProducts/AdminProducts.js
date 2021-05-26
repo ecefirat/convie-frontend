@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { config } from "../../constants";
 
 function AdminProducts(props) {
   const { product } = props;
@@ -8,9 +9,11 @@ function AdminProducts(props) {
 
   const { register, handleSubmit } = useForm();
 
+  const url = config.url;
+
   const changePName = (data) => {
     console.log(data);
-    fetch("http://localhost:5000/pName", {
+    fetch(url.url_pName, {
       method: "POST",
       body: JSON.stringify({ data, pID: product.pID }),
       headers: {
@@ -33,7 +36,7 @@ function AdminProducts(props) {
   };
 
   const deleteProduct = () => {
-    fetch("http://localhost:5000/product", {
+    fetch(url.url_product, {
       method: "POST",
       body: JSON.stringify({ pID: product.pID }),
       headers: {

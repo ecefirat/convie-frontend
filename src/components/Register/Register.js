@@ -1,17 +1,17 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
+import { config } from "../../constants";
 
 function Register(props) {
   let history = useHistory();
   const { register, handleSubmit, errors } = useForm();
-  console.log("bla");
+  const url = config.url;
 
   const submitCustomerRegistration = (data) => {
     console.log(data);
     if (passwordCheck()) {
-      let url = "http://localhost:5000/register";
-      fetch(url, {
+      fetch(url.url_register, {
         method: "POST",
         body: JSON.stringify(data),
         headers: {

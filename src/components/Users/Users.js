@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { config } from "../../constants";
 
 function Users(props) {
   const { user } = props;
@@ -11,9 +12,11 @@ function Users(props) {
 
   const { register, handleSubmit } = useForm();
 
+  const url = config.url;
+
   const changeUName = (data) => {
     console.log(data);
-    fetch("http://localhost:5000/uName", {
+    fetch(url.url_uName, {
       method: "POST",
       body: JSON.stringify({ data, customer_id: user.customer_id }),
       headers: {
@@ -40,7 +43,7 @@ function Users(props) {
   };
 
   const deleteUser = () => {
-    fetch("http://localhost:5000/users", {
+    fetch(url.url_users, {
       method: "POST",
       body: JSON.stringify({ user_id: user.customer_id }),
       headers: {

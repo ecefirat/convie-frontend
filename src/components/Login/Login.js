@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "./Login.css";
+import { config } from "../../constants";
 
 import { css } from "@emotion/core";
 import { jsx } from "@emotion/react";
@@ -27,7 +28,7 @@ function Login(props) {
   const submitCustomerLogin = (data) => {
     console.log(data);
     console.log("login data");
-    let url = "http://localhost:5000/login";
+    let url = config.url.url_login;
     fetch(url, {
       method: "POST",
       body: JSON.stringify(data),
