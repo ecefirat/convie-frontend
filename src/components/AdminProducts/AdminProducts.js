@@ -6,6 +6,7 @@ function AdminProducts(props) {
   const { product } = props;
   const [pName, setPName] = useState(product.pName);
   const [msg, setMessage] = useState(false);
+  const [deleteMsg, setDeleteMsg] = useState();
 
   const { register, handleSubmit } = useForm();
 
@@ -38,7 +39,7 @@ function AdminProducts(props) {
   const deleteProduct = () => {
     fetch(url.url_product, {
       method: "POST",
-      body: JSON.stringify({ pID: product.pID }),
+      body: JSON.stringify({ pID: product.pID, pName: product.pName }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -49,7 +50,8 @@ function AdminProducts(props) {
       } else if (res.status === 200) {
         res.json().then((data) => {
           console.log("deleted");
-          console.log(data.pID);
+          console.log(data.pName);
+          setDeleteMsg(`Product ${data.pName} is deleted.`);
         });
       }
     });
@@ -60,48 +62,51 @@ function AdminProducts(props) {
   };
 
   return (
-    <div className="col s4 m2 l2" key={product.pID}>
-      <div className="card horizontal">
-        <div className="card-stacked" style={{ flexDirection: "row" }}>
-          <img
-            src={product.pImage}
-            alt={product.pName}
-            style={{ width: 100, height: 100, margin: 10 }}
-          />
-          <button
-            onClick={handleSubmit(deleteProduct)}
-            className="btn-floating btn-small halfway-fab waves-effect waves-light red">
-            <i className="material-icons">delete</i>
-          </button>
-          <div className="card-content">
-            {/* <input></input> */}
-            <input
-              type="text"
-              name="pName"
-              value={pName}
-              ref={register({
-                pattern: /^[A-Z]{1}[A-Z a-z]{2,}/,
-                maxlength: 25,
-                minLength: 2,
-              })}
-              onChange={(e) => setPName(e.target.value)}
-              onKeyPress={(e) => {
-                if (e.which === 13) {
-                  setPName(e.target.value);
-                  handleSubmit(changePName(pName));
-                  console.log(msg);
-                }
-              }}
-              onBlur={hideMsg}
+    <>
+      <p>{deleteMsg}</p>
+      <div className="col s4 m2 l2" key={product.pID}>
+        <div className="card horizontal">
+          <div className="card-stacked" style={{ flexDirection: "row" }}>
+            <img
+              src={product.pImage}
+              alt={product.pName}
+              style={{ width: 100, height: 100, margin: 10 }}
             />
-            <p style={msg ? { display: "block" } : { display: "none" }}>
-              Product name is changed as {pName}.
-            </p>
-            <p>${product.pPrice}</p>
+            <button
+              onClick={handleSubmit(deleteProduct)}
+              className="btn-floating btn-small halfway-fab waves-effect waves-light red">
+              <i className="material-icons">delete</i>
+            </button>
+            <div className="card-content">
+              {/* <input></input> */}
+              <input
+                type="text"
+                name="pName"
+                value={pName}
+                ref={register({
+                  pattern: /^[A-Z]{1}[A-Z a-z]{2,}/,
+                  maxlength: 25,
+                  minLength: 2,
+                })}
+                onChange={(e) => setPName(e.target.value)}
+                onKeyPress={(e) => {
+                  if (e.which === 13) {
+                    setPName(e.target.value);
+                    handleSubmit(changePName(pName));
+                    console.log(msg);
+                  }
+                }}
+                onBlur={hideMsg}
+              />
+              <p style={msg ? { display: "block" } : { display: "none" }}>
+                Product name is changed as {pName}.
+              </p>
+              <p>${product.pPrice}</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

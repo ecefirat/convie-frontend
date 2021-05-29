@@ -13,12 +13,16 @@ const Admin = (props) => {
   const [loaded, setLoaded] = useState(false);
   const [addAdm, setAddAdm] = useState(false);
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors } = useForm();
 
   const [users, setUsers] = useState([]);
   const [products, setProducts] = useState([]);
   const [adminName, setAdminName] = useState("");
   const [welcomeMsg, setWelcomeMsg] = useState();
+  const [adminMsg, setAdminMsg] = useState();
+  const [productMsg, setProductMsg] = useState();
+  const [existMsg, setExistMsg] = useState();
+  const [existsMsg, setExistsMsg] = useState();
 
   const url = config.url;
 
@@ -142,10 +146,13 @@ const Admin = (props) => {
     }).then((res) => {
       if (res.status === 400) {
         console.log("cant add product");
+      } else if (res.status === 409) {
+        setExistsMsg(`${data.pName} already exists.`);
       } else if (res.status === 200) {
         res.json().then((data) => {
           console.log(data);
           console.log("added");
+          setProductMsg(`Product ${data.pName} is added as a new product.`);
         });
       }
     });
@@ -163,12 +170,13 @@ const Admin = (props) => {
     }).then((res) => {
       if (res.status === 400) {
         console.log("cant add admin");
+      } else if (res.status === 409) {
+        setExistMsg("This admin already exists in the system.");
       } else if (res.status === 200) {
         res.json().then((data) => {
           console.log(data);
           console.log("added");
-          setAddAdm(true);
-          setAdminName(data.admin);
+          setAdminMsg(`User ${data.admin} is added as admin.`);
         });
       }
     });
@@ -184,21 +192,31 @@ const Admin = (props) => {
         name="customer_name"
         placeholder="Name"
         ref={register({
-          pattern: /^[A-Z]{1}[A-Z a-z]{2,}/,
+          pattern: /^[A-Z]{1}[A-Z a-z]{1,}/,
           maxlength: 25,
           minLength: 2,
         })}
       />
+      {errors.customer_name && (
+        <span>
+          First name should include characters and start with a capital letter.
+        </span>
+      )}
       <input
         type="text"
         name="customer_surname"
         placeholder="Surname"
         ref={register({
-          pattern: /^[A-Z]{1}[A-Z a-z]{2,}/,
+          pattern: /^[A-Z]{1}[A-Z a-z]{1,}/,
           maxlength: 25,
           minLength: 2,
         })}
       />
+      {errors.customer_surname && (
+        <span>
+          Last name should include characters and start with a capital letter.
+        </span>
+      )}
       <input
         type="email"
         name="customer_email"
@@ -209,6 +227,9 @@ const Admin = (props) => {
           maxLength: 50,
         })}
       />
+      {errors.customer_email && (
+        <span>Please enter a valid email address.</span>
+      )}
       <input
         type="password"
         name="customer_password"
@@ -217,22 +238,28 @@ const Admin = (props) => {
           pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
         })}
       />
+
       <i
         className="material-icons"
-        style={{ cursor: "pointer" }}
+        style={{ cursor: "pointer", display: "block", color: "green" }}
         onClick={handleSubmit(addAdmin)}>
-        add
+        group_add
       </i>
-      <p style={addAdm ? { display: "block" } : { display: "none" }}>
-        User {adminName} is added as admin.
-      </p>
+      {errors.customer_password && (
+        <span>
+          Your password should contain at least one number, one upper case and
+          one lower case letter and must be 8 characters long.
+        </span>
+      )}
+      <p>{adminMsg}</p>
+      <p>{existMsg}</p>
       <div style={{ height: 350, overflow: "scroll" }}>
         {users.map((user) => {
           return <Users key={user.customer_id} user={user} />;
         })}
       </div>
-      <h2>Products</h2>
-      <h5>Add New Product</h5>
+      <h3>Products</h3>
+      <h6>Add New Product</h6>
       <input
         type="text"
         name="pName"
@@ -243,20 +270,32 @@ const Admin = (props) => {
           minLength: 2,
         })}
       />
+      {errors.pName && (
+        <span>
+          Product name should include characters and start with a capital
+          letter.
+        </span>
+      )}
       <input
         type="number"
         name="pPrice"
-        placeholder="Product Price"
+        placeholder="Price i.e 0.99"
         ref={register({
+          minLength: 3,
           maxlength: 5,
         })}
       />
       <i
         className="material-icons"
-        style={{ cursor: "pointer" }}
+        style={{ cursor: "pointer", color: "green" }}
         onClick={handleSubmit(addProduct)}>
-        add
+        add_circle
       </i>
+      {errors.pPrice && (
+        <span>Product price should include numbers and two decimals.</span>
+      )}
+      <p>{productMsg}</p>
+      <p>{existsMsg}</p>
       <div style={{ height: 300, overflow: "scroll", marginBottom: 80 }}>
         {products.map((product) => {
           return <AdminProducts key={product.pID} product={product} />;
