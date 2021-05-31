@@ -1,5 +1,5 @@
 const CACHE_NAME = "version-1";
-const urlsToCache = ["index.html", "offline.html"];
+const urlsToCache = ["index.html", "offline.html", "../src/Main/Main.js"];
 
 const self = this;
 
@@ -20,7 +20,7 @@ self.addEventListener("fetch", (event) => {
     caches.match(event.request).then(() => {
       // console.log(event.request);
       console.log("fetching cache");
-      return fetch(event.request).catch(() => caches.match("offline.html"));
+      return fetch(event.request).catch(() => caches.match(urlsToCache));
     })
   );
 });
