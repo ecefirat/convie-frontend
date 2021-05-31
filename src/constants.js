@@ -23,6 +23,7 @@ const prod = {
     url_sessionInfo: "https://convie.herokuapp.com/sessionInfo",
   },
 };
+
 const dev = {
   url: {
     url: "http://localhost:5000",
@@ -49,4 +50,4 @@ const dev = {
   },
 };
 
-export const config = process.env.NODE_ENV === `development` ? dev : prod;
+export const config = process.env.NODE_ENV === `development` ? prod : prod;
