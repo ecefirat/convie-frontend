@@ -9,7 +9,6 @@ import Login from "../Login/Login";
 import { css } from "@emotion/core";
 import { jsx } from "@emotion/react";
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
-import { config } from "../../constants";
 
 // Can be a string as well. Need to ensure each key-value pair ends with ;
 const override = css`
@@ -39,10 +38,8 @@ function Main(props) {
   const [customer_address, setCustomerAddress] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const url = config.url;
-
   useEffect(() => {
-    const req = fetch(url.url_sessionInfo, {
+    const req = fetch(process.env.url_sessionInfo, {
       method: "GET",
       body: JSON.stringify(),
       headers: {
@@ -71,7 +68,7 @@ function Main(props) {
 
   useEffect(() => {
     async function fetchAPI() {
-      const request = await fetch(url.url_products, {
+      const request = await fetch(process.env.url_products, {
         method: "GET",
         body: JSON.stringify(),
         headers: {
@@ -111,7 +108,7 @@ function Main(props) {
   }, [cart]);
 
   const handleSendOrder = (totall) => {
-    fetch(url.url_order, {
+    fetch(process.env.url_order, {
       method: "POST",
       body: JSON.stringify({
         totals: totall,

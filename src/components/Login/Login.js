@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "./Login.css";
-import { config } from "../../constants";
 
 import { css } from "@emotion/core";
 import { jsx } from "@emotion/react";
@@ -28,8 +27,7 @@ function Login(props) {
   const submitCustomerLogin = (data) => {
     console.log(data);
     console.log("login data");
-    let url = config.url.url_login;
-    fetch(url, {
+    fetch(process.env.url_login, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {

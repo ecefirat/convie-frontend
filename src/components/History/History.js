@@ -5,7 +5,6 @@ import HistoryDetails from "../HistoryDetails/HistoryDetails";
 import { css } from "@emotion/core";
 // import { jsx } from "@emotion/react";
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
-import { config } from "../../constants";
 
 // Can be a string as well. Need to ensure each key-value pair ends with ;
 const override = css`
@@ -25,10 +24,8 @@ function History() {
   const [history, setHistory] = useState([]);
   const [customer_id, setCustomerId] = useState("");
 
-  const url = config.url;
-
   useEffect(() => {
-    fetch(url.url_sessionInfo, {
+    fetch(process.env.url_sessionInfo, {
       method: "GET",
       body: JSON.stringify(),
       headers: {
@@ -53,7 +50,7 @@ function History() {
   }, []);
 
   useEffect(() => {
-    const request = fetch(url.url_history, {
+    const request = fetch(process.env.url_history, {
       method: "POST",
       body: JSON.stringify({ customer_id: customer_id }),
       headers: {
@@ -82,7 +79,7 @@ function History() {
   const deleteOrder = (data) => {
     console.log(data);
     console.log("deleteorder");
-    fetch(url.url_orders, {
+    fetch(process.env.url_orders, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {

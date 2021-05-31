@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { config } from "../../constants";
 
 export const Orders = (props) => {
   const { total } = props;
   let history = useHistory();
 
   const [customer, setCustomer] = useState("");
-  const url = config.url;
 
   useEffect(() => {
-    fetch(url.url_sessionInfo, {
+    fetch(process.env.url_sessionInfo, {
       method: "GET",
       body: JSON.stringify(),
       headers: {

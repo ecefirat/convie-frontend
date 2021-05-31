@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import AdminProducts from "../AdminProducts/AdminProducts";
 import Product from "../Products/Product/Product";
 import Users from "../Users/Users";
-import { config } from "../../constants";
 
 const Admin = (props) => {
   let history = useHistory();
@@ -24,11 +23,9 @@ const Admin = (props) => {
   const [existMsg, setExistMsg] = useState();
   const [existsMsg, setExistsMsg] = useState();
 
-  const url = config.url;
-
   useEffect(() => {
     async function fetchSes() {
-      const req = await fetch(url.url_sessionInfo, {
+      const req = await fetch(process.env.url_sessionInfo, {
         method: "GET",
         body: JSON.stringify(),
         headers: {
@@ -56,7 +53,7 @@ const Admin = (props) => {
   }, []);
 
   useEffect(() => {
-    fetch(url.url_onlyAdmin, {
+    fetch(process.env.url_onlyAdmin, {
       method: "GET",
       body: JSON.stringify(),
       headers: {
@@ -77,7 +74,7 @@ const Admin = (props) => {
 
   useEffect(() => {
     async function fetchAPI() {
-      const request = await fetch(url.url_userInfo, {
+      const request = await fetch(process.env.url_userInfo, {
         method: "GET",
         body: JSON.stringify(),
         headers: {
@@ -107,7 +104,7 @@ const Admin = (props) => {
   }, []);
 
   useEffect(() => {
-    const request = fetch(url.url_products, {
+    const request = fetch(process.env.url_products, {
       method: "GET",
       body: JSON.stringify(),
       headers: {
@@ -136,7 +133,7 @@ const Admin = (props) => {
 
   const addProduct = (data) => {
     console.log(data);
-    fetch(url.url_addProduct, {
+    fetch(process.env.url_addProduct, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -160,7 +157,7 @@ const Admin = (props) => {
 
   const addAdmin = (data) => {
     console.log(data);
-    fetch(url.url_addAdmin, {
+    fetch(process.env.url_addAdmin, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {

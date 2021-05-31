@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { config } from "../../constants";
 import "./Footer.css";
 
 function Footer() {
-  const url = config.url;
-
   useEffect(() => {
     async function fetchSes() {
-      const req = await fetch(url.url_sessionInfo, {
+      const req = await fetch(process.env.url_sessionInfo, {
         method: "GET",
         body: JSON.stringify(),
         headers: {
