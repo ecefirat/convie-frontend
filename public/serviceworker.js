@@ -1,5 +1,25 @@
 const CACHE_NAME = "version-1";
-const urlsToCache = ["index.html", "offline.html"];
+const urlsToCache = [
+  "index.html",
+  "offline.html",
+  "Admin.js",
+  "AdminProducts.js",
+  "Basket.js",
+  "DarkMode.js",
+  "Footer.js",
+  "Header.js",
+  "History.js",
+  "HistoryDetails.js",
+  "Login.js",
+  "Main.js",
+  "Orders.js",
+  "Products.js",
+  "Profile/js",
+  "Users.js",
+  "App/js",
+  "constants.js",
+  "index.js",
+];
 
 const self = this;
 
