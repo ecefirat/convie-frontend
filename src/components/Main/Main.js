@@ -10,6 +10,10 @@ import { css } from "@emotion/core";
 import { jsx } from "@emotion/react";
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 
+require("dotenv").config({
+  path: "../",
+});
+
 // Can be a string as well. Need to ensure each key-value pair ends with ;
 const override = css`
   display: block;
@@ -37,9 +41,10 @@ function Main(props) {
   const [customer_id, setCustomerId] = useState("");
   const [customer_address, setCustomerAddress] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
+  console.log(process.env.REACT_APP_URL_SESSIONINFO);
 
   useEffect(() => {
-    const req = fetch(process.env.url_sessionInfo, {
+    const req = fetch(process.env.REACT_APP_URL_SESSIONINFO, {
       method: "GET",
       body: JSON.stringify(),
       headers: {
@@ -68,7 +73,7 @@ function Main(props) {
 
   useEffect(() => {
     async function fetchAPI() {
-      const request = await fetch(process.env.url_products, {
+      const request = await fetch(process.env.REACT_APP_URL_PRODUCTS, {
         method: "GET",
         body: JSON.stringify(),
         headers: {
@@ -108,7 +113,7 @@ function Main(props) {
   }, [cart]);
 
   const handleSendOrder = (totall) => {
-    fetch(process.env.url_order, {
+    fetch(process.env.REACT_APP_URL_ORDER, {
       method: "POST",
       body: JSON.stringify({
         totals: totall,

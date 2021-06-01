@@ -25,7 +25,7 @@ function History() {
   const [customer_id, setCustomerId] = useState("");
 
   useEffect(() => {
-    fetch(process.env.url_sessionInfo, {
+    fetch(process.env.REACT_APP_URL_SESSIONINFO, {
       method: "GET",
       body: JSON.stringify(),
       headers: {
@@ -50,7 +50,7 @@ function History() {
   }, []);
 
   useEffect(() => {
-    const request = fetch(process.env.url_history, {
+    const request = fetch(process.env.REACT_APP_URL_HISTORY, {
       method: "POST",
       body: JSON.stringify({ customer_id: customer_id }),
       headers: {
@@ -79,7 +79,7 @@ function History() {
   const deleteOrder = (data) => {
     console.log(data);
     console.log("deleteorder");
-    fetch(process.env.url_orders, {
+    fetch(process.env.REACT_APP_URL_ORDERS, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {

@@ -27,7 +27,7 @@ function Login(props) {
   const submitCustomerLogin = (data) => {
     console.log(data);
     console.log("login data");
-    fetch(process.env.url_login, {
+    fetch(process.env.REACT_APP_URL_LOGIN, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {

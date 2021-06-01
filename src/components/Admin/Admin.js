@@ -25,7 +25,7 @@ const Admin = (props) => {
 
   useEffect(() => {
     async function fetchSes() {
-      const req = await fetch(process.env.url_sessionInfo, {
+      const req = await fetch(process.env.REACT_APP_URL_SESSIONINFO, {
         method: "GET",
         body: JSON.stringify(),
         headers: {
@@ -53,7 +53,7 @@ const Admin = (props) => {
   }, []);
 
   useEffect(() => {
-    fetch(process.env.url_onlyAdmin, {
+    fetch(process.env.REACT_APP_URL_ONLYADMIN, {
       method: "GET",
       body: JSON.stringify(),
       headers: {
@@ -74,7 +74,7 @@ const Admin = (props) => {
 
   useEffect(() => {
     async function fetchAPI() {
-      const request = await fetch(process.env.url_userInfo, {
+      const request = await fetch(process.env.REACT_APP_URL_USERINFO, {
         method: "GET",
         body: JSON.stringify(),
         headers: {
@@ -104,7 +104,7 @@ const Admin = (props) => {
   }, []);
 
   useEffect(() => {
-    const request = fetch(process.env.url_products, {
+    const request = fetch(process.env.REACT_APP_URL_PRODUCTS, {
       method: "GET",
       body: JSON.stringify(),
       headers: {
@@ -133,7 +133,7 @@ const Admin = (props) => {
 
   const addProduct = (data) => {
     console.log(data);
-    fetch(process.env.url_addProduct, {
+    fetch(process.env.REACT_APP_URL_ADDPRODUCT, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -157,7 +157,7 @@ const Admin = (props) => {
 
   const addAdmin = (data) => {
     console.log(data);
-    fetch(process.env.url_addAdmin, {
+    fetch(process.env.REACT_APP_URL_ADDADMIN, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {

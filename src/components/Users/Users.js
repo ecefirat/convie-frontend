@@ -13,7 +13,7 @@ function Users(props) {
 
   const changeUName = (data) => {
     console.log(data);
-    fetch(process.env.url_uName, {
+    fetch(process.env.REACT_APP_URL_UNAME, {
       method: "POST",
       body: JSON.stringify({ data, customer_id: user.customer_id }),
       headers: {
@@ -40,7 +40,7 @@ function Users(props) {
   };
 
   const deleteUser = () => {
-    fetch(process.env.url_users, {
+    fetch(process.env.REACT_APP_URL_USERS, {
       method: "POST",
       body: JSON.stringify({ user_id: user.customer_id }),
       headers: {

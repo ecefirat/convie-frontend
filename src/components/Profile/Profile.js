@@ -28,7 +28,7 @@ function Profile() {
   const [fileTypeError, setFileTypeError] = useState(false);
 
   useEffect(() => {
-    fetch(process.env.url_sessionInfo, {
+    fetch(process.env.REACT_APP_URL_SESSIONINFO, {
       method: "GET",
       body: JSON.stringify(),
       headers: {
@@ -59,7 +59,7 @@ function Profile() {
   const handleAddress = (data) => {
     console.log(data);
     console.log("handleaddress");
-    fetch(process.env.url_customerAddress, {
+    fetch(process.env.REACT_APP_URL_CUSTOMERADDRESS, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -85,7 +85,7 @@ function Profile() {
     formData.append("picture", data.picture[0]);
     console.log(formData);
 
-    fetch(process.env.url_picture, {
+    fetch(process.env.REACT_APP_URL_PICTURE, {
       method: "POST",
       body: formData,
       credentials: "include",
@@ -101,7 +101,7 @@ function Profile() {
           // const newImagePath =
           //   "http://localhost:5000/uploads/" + data.picture.name;
           const newImagePath =
-            process.env.url_uploads + "/" + data.picture.name;
+            process.env.REACT_APP_URL_UPLOADS + "/" + data.picture.name;
           console.log(newImagePath);
           setImagePath(newImagePath);
         });
@@ -113,7 +113,7 @@ function Profile() {
     setProfilePicture(data.profile_picture);
     console.log(data);
     console.log("changeimage");
-    fetch(process.env.url_uploads, {
+    fetch(process.env.REACT_APP_URL_UPLOADS, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -134,7 +134,7 @@ function Profile() {
   };
 
   const deleteAccount = (data) => {
-    fetch(process.env.url_account, {
+    fetch(process.env.REACT_APP_URL_ACCOUNT, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -155,7 +155,7 @@ function Profile() {
   };
 
   const handleLogout = () => {
-    fetch(process.env.url_logout, {
+    fetch(process.env.REACT_APP_URL_LOGOUT, {
       method: "GET",
       body: JSON.stringify(),
       headers: {
