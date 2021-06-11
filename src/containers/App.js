@@ -13,6 +13,7 @@ import "../containers/App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Orders } from "../components/Orders/Orders";
 import History from "../components/History/History";
+import Help from "../components/Help/Help";
 
 function App(props) {
   return (
@@ -34,6 +35,7 @@ function App(props) {
             <Route path="/history" component={History}></Route>
             <Route path="/basket" component={Basket}></Route>
             <Route path="/admin" component={Admin}></Route>
+            <Route path="/help" component={Help}></Route>
             <Route path="/" component={Main}></Route>
             {/* <Route component={NotFoundPage} /> */}
           </Switch>

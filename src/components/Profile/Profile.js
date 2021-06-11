@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { css } from "@emotion/core";
 // import { jsx } from "@emotion/react";
@@ -176,9 +176,27 @@ function Profile() {
   return (
     <div>
       {loggedIn ? (
-        <div className="container">
-          <h4>Hi {customer_name}!</h4>
-          <img src={profile_picture} alt="img" width="120px" height="120px" />
+        <div className="container" style={{ marginTop: 20 }}>
+          <h4 style={{ display: "inline" }}>Hi {customer_name}!</h4>
+          <Link to="/help">
+            <i
+              className="material-icons"
+              style={{
+                float: "right",
+                color: "#fff8e1",
+                backgroundColor: "#25170ecb",
+                fontSize: 22,
+              }}>
+              help
+            </i>
+          </Link>
+          <img
+            src={profile_picture}
+            style={{ display: "block" }}
+            alt="img"
+            width="120px"
+            height="120px"
+          />
           <h5>Edit Address</h5>
           <p>{customer_address}</p>
           <input
@@ -260,12 +278,12 @@ function Profile() {
           {/* <h5>Update Payment Details</h5> */}
           <button
             className="btn waves-effect waves-light grey"
-            style={{ marginBottom: 70, marginRight: 10 }}
+            style={{ marginBottom: 80, marginRight: 10 }}
             onClick={handleSubmit(deleteAccount)}>
             Delete Account
           </button>
           <button
-            style={{ marginBottom: 70 }}
+            style={{ marginBottom: 80 }}
             className="btn waves-effect waves-light grey"
             onClick={() => handleLogout()}>
             Logout
