@@ -8,7 +8,7 @@ export const Orders = (props) => {
   const [customer, setCustomer] = useState("");
 
   useEffect(() => {
-    fetch(process.env.REACT_APP_URL_SESSIONINFO, {
+    fetch(process.env.REACT_APP_URL + "/sessionInfo", {
       method: "GET",
       body: JSON.stringify(),
       headers: {

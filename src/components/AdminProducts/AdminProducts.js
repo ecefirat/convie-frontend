@@ -11,7 +11,7 @@ function AdminProducts(props) {
 
   const changePName = (data) => {
     console.log(data);
-    fetch(process.env.REACT_APP_URL_PNAME, {
+    fetch(process.env.REACT_APP_URL + "/pName", {
       method: "POST",
       body: JSON.stringify({ data, pID: product.pID }),
       headers: {
@@ -34,7 +34,7 @@ function AdminProducts(props) {
   };
 
   const deleteProduct = () => {
-    fetch(process.env.REACT_APP_URL_PRODUCT, {
+    fetch(process.env.REACT_APP_URL + "/product", {
       method: "POST",
       body: JSON.stringify({ pID: product.pID, pName: product.pName }),
       headers: {

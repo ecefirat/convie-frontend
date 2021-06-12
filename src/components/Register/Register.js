@@ -9,7 +9,7 @@ function Register(props) {
   const submitCustomerRegistration = (data) => {
     console.log(data);
     if (passwordCheck()) {
-      fetch(process.env.REACT_APP_URL_REGISTER, {
+      fetch(process.env.REACT_APP_URL + "/register", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {

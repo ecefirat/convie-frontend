@@ -5,7 +5,7 @@ import "./Footer.css";
 function Footer() {
   useEffect(() => {
     async function fetchSes() {
-      const req = await fetch(process.env.REACT_APP_URL_SESSIONINFO, {
+      const req = await fetch(process.env.REACT_APP_URL + "/sessionInfo", {
         method: "GET",
         body: JSON.stringify(),
         headers: {

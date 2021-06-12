@@ -41,10 +41,10 @@ function Main(props) {
   const [customer_id, setCustomerId] = useState("");
   const [customer_address, setCustomerAddress] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
-  console.log(process.env.REACT_APP_URL_SESSIONINFO);
+  console.log(process.env.REACT_APP_URL + "/sessionInfo");
 
   useEffect(() => {
-    const req = fetch(process.env.REACT_APP_URL_SESSIONINFO, {
+    const req = fetch(process.env.REACT_APP_URL + "/sessionInfo", {
       method: "GET",
       body: JSON.stringify(),
       headers: {
@@ -73,7 +73,7 @@ function Main(props) {
 
   useEffect(() => {
     async function fetchAPI() {
-      const request = await fetch(process.env.REACT_APP_URL_PRODUCTS, {
+      const request = await fetch(process.env.REACT_APP_URL + "/products", {
         method: "GET",
         body: JSON.stringify(),
         headers: {
@@ -113,7 +113,7 @@ function Main(props) {
   }, [cart]);
 
   const handleSendOrder = (totall) => {
-    fetch(process.env.REACT_APP_URL_ORDER, {
+    fetch(process.env.REACT_APP_URL + "/order", {
       method: "POST",
       body: JSON.stringify({
         totals: totall,

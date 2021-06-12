@@ -28,7 +28,7 @@ function Profile() {
   const [fileTypeError, setFileTypeError] = useState(false);
 
   useEffect(() => {
-    fetch(process.env.REACT_APP_URL_SESSIONINFO, {
+    fetch(process.env.REACT_APP_URL + "/sessionInfo", {
       method: "GET",
       body: JSON.stringify(),
       headers: {
@@ -59,7 +59,7 @@ function Profile() {
   const handleAddress = (data) => {
     console.log(data);
     console.log("handleaddress");
-    fetch(process.env.REACT_APP_URL_CUSTOMERADDRESS, {
+    fetch(process.env.REACT_APP_URL + "/customerAddress", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -85,7 +85,7 @@ function Profile() {
     formData.append("picture", data.picture[0]);
     console.log(formData);
 
-    fetch(process.env.REACT_APP_URL_PICTURE, {
+    fetch(process.env.REACT_APP_URL + "/picture", {
       method: "POST",
       body: formData,
       credentials: "include",
@@ -101,7 +101,7 @@ function Profile() {
           // const newImagePath =
           //   "http://localhost:5000/uploads/" + data.picture.name;
           const newImagePath =
-            process.env.REACT_APP_URL_UPLOADS + "/" + data.picture.name;
+            process.env.REACT_APP_URL + "/uploads" + "/" + data.picture.name;
           console.log(newImagePath);
           setImagePath(newImagePath);
         });
@@ -113,7 +113,7 @@ function Profile() {
     setProfilePicture(data.profile_picture);
     console.log(data);
     console.log("changeimage");
-    fetch(process.env.REACT_APP_URL_UPLOADS, {
+    fetch(process.env.REACT_APP_URL + "/uploads", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -134,7 +134,7 @@ function Profile() {
   };
 
   const deleteAccount = (data) => {
-    fetch(process.env.REACT_APP_URL_ACCOUNT, {
+    fetch(process.env.REACT_APP_URL + "/account", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -155,7 +155,7 @@ function Profile() {
   };
 
   const handleLogout = () => {
-    fetch(process.env.REACT_APP_URL_LOGOUT, {
+    fetch(process.env.REACT_APP_URL + "/logout", {
       method: "GET",
       body: JSON.stringify(),
       headers: {
