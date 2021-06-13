@@ -2,7 +2,7 @@
 
 # Installation
 
-- Git clone repo
+- Git clone both repos
 - npm install
 - Phpmyadmin -> Create New Database
   - Priviligies -> Add user acc.
@@ -15,7 +15,12 @@
   - password=yourpassword
   - database=yourdatabasename
   - port=8889
-  - session_secret=astrongpassword
-  - Change it with your own to your details
+  - Change user, password, database with your own your details
 - Go to frontend .env file and paste REACT_APP_URL=http://localhost:5000
 - Change 5000 depending on your port
+
+# Roadmap
+
+- Implementing a grocery service delivery(like ubereats)
+- Drivers/riders can sign up and get notifications when an order is placed
+- Delivery is completed when drivers deliver the groceries
