@@ -19,12 +19,7 @@ function App(props) {
   return (
     <Router>
       <div>
-        <Header
-        // profile="Profile"
-        // // register="Register"
-        // login="Login"
-        // basket="Cart"
-        />
+        <Header />
         <div className="container">
           <Switch>
             <Route path="/profile" component={Profile}></Route>

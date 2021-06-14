@@ -90,7 +90,6 @@ function Users(props) {
               <i className="material-icons">account_circle</i>
             </button>
             <div className="card-content">
-              {/* <label>First Name</label> */}
               <input
                 type="text"
                 name="uName"
@@ -113,8 +112,6 @@ function Users(props) {
               <p style={msg ? { display: "block" } : { display: "none" }}>
                 User name is changed as {uName}.
               </p>
-              {/* <p>{user.customer_name}</p> */}
-              {/* <p>{user.customer_surname}</p> */}
               <p>{user.customer_address}</p>
               <p>{user.customer_email}</p>
               <p>{user.role}</p>

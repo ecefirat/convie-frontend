@@ -1,20 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Product from "../Products/Product/Product";
 import Basket from "../Basket/Basket";
-import Orders from "../Orders/Orders";
 import "./Main.css";
-import Login from "../Login/Login";
 
 import { css } from "@emotion/core";
 import { jsx } from "@emotion/react";
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 
-require("dotenv").config({
-  path: "../",
-});
-
-// Can be a string as well. Need to ensure each key-value pair ends with ;
 const override = css`
   display: block;
   margin: 35vh auto 5vh;
@@ -26,12 +19,10 @@ function Main(props) {
   let [color, setColor] = useState("#ffb300");
 
   let history = useHistory();
-  // const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
 
   const [cart, setCart] = useState(
     JSON.parse(localStorage.getItem("cart")) || []
   );
-  // localStorage.getItem("cart") ? localStorage.setItem("cart", cart) : []
   const [products, setProducts] = useState([]);
   const [loaded, setLoaded] = useState(false);
   //change this to if(!data) {return Loading}
@@ -67,7 +58,6 @@ function Main(props) {
         });
       }
     });
-    // .catch((error) => console.log(error));
     return req;
   }, []);
 
@@ -103,12 +93,7 @@ function Main(props) {
   }, []);
 
   useEffect(() => {
-    // if (localStorage.getItem("cart")) {
-    //   localStorage.setItem("cart", JSON.stringify(cart));
-    //   // setCart(JSON.parse(localStorage.getItem("cart")));
-    // } else {
     localStorage.setItem("cart", JSON.stringify(cart));
-    // }
     calculateTotal();
   }, [cart]);
 

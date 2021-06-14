@@ -75,7 +75,6 @@ function AdminProducts(props) {
               <i className="material-icons">delete</i>
             </button>
             <div className="card-content">
-              {/* <input></input> */}
               <input
                 type="text"
                 name="pName"

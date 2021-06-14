@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import AdminProducts from "../AdminProducts/AdminProducts";
-import Product from "../Products/Product/Product";
 import Users from "../Users/Users";
 
 const Admin = (props) => {
@@ -10,13 +9,11 @@ const Admin = (props) => {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [loaded, setLoaded] = useState(false);
-  const [addAdm, setAddAdm] = useState(false);
 
   const { register, handleSubmit, errors } = useForm();
 
   const [users, setUsers] = useState([]);
   const [products, setProducts] = useState([]);
-  const [adminName, setAdminName] = useState("");
   const [welcomeMsg, setWelcomeMsg] = useState();
   const [adminMsg, setAdminMsg] = useState();
   const [productMsg, setProductMsg] = useState();

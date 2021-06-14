@@ -3,10 +3,8 @@ import { useHistory } from "react-router-dom";
 import HistoryDetails from "../HistoryDetails/HistoryDetails";
 
 import { css } from "@emotion/core";
-// import { jsx } from "@emotion/react";
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 
-// Can be a string as well. Need to ensure each key-value pair ends with ;
 const override = css`
   display: block;
   margin: 35vh auto 5vh;

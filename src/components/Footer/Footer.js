@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./Footer.css";
 
 function Footer() {
@@ -39,7 +39,6 @@ function Footer() {
 
   return (
     <nav className="nav-wrapper amber darken-1">
-      {/* <div className="nav-wrapper amber darken-1"> */}
       <ul className="nav-mobile ">
         <li>
           <Link to="/">
@@ -62,7 +61,6 @@ function Footer() {
           </Link>
         </li>
       </ul>
-      {/* </div> */}
     </nav>
   );
 }

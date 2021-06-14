@@ -78,7 +78,6 @@ function Register(props) {
             <label htmlFor="icon_prefix first_name">First Name</label>
           </div>
           <div className="input-field col s6">
-            {/* <i className="material-icons prefix">account_circl</i> */}
             <input
               id="last_name"
               name="last_name"

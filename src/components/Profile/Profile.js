@@ -3,10 +3,8 @@ import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
 
 import { css } from "@emotion/core";
-// import { jsx } from "@emotion/react";
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 
-// Can be a string as well. Need to ensure each key-value pair ends with ;
 const override = css`
   display: block;
   margin: 35vh auto 5vh;
@@ -44,8 +42,6 @@ function Profile() {
           setCustomerEmail(data.user.customer_email);
           setLoggedIn(true);
           history.push("/profile");
-          // const prof_pic = "http://localhost:5000/uploads" + profile_picture;
-          // console.log(prof_pic);
         });
       } else if (res.status === 400) {
         res.json().then((data) => {
@@ -98,8 +94,6 @@ function Profile() {
         setFileTypeError(false);
         res.json().then((data) => {
           console.log(data);
-          // const newImagePath =
-          //   "http://localhost:5000/uploads/" + data.picture.name;
           const newImagePath =
             process.env.REACT_APP_URL + "/uploads" + "/" + data.picture.name;
           console.log(newImagePath);
@@ -168,7 +162,6 @@ function Profile() {
         if (res.status === 200) {
           setLoggedIn(false);
           history.push("/login");
-          // history.go();
         }
       });
   };

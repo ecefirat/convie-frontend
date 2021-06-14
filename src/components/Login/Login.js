@@ -3,23 +3,9 @@ import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "./Login.css";
 
-import { css } from "@emotion/core";
-import { jsx } from "@emotion/react";
-import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
-
-// Can be a string as well. Need to ensure each key-value pair ends with ;
-const override = css`
-  display: block;
-  margin: 25vh auto 5vh;
-  border-color: red;
-`;
-
 function Login(props) {
   const [loggedIn, setLoggedIn] = useState(false);
   localStorage.setItem("loggedIn", false);
-
-  let [loading, setLoading] = useState(true);
-  let [color, setColor] = useState("#ffb300");
 
   let history = useHistory();
   const { register, handleSubmit } = useForm();
@@ -71,12 +57,6 @@ function Login(props) {
         alt="logoGif"
         width="100px"
         style={{ margin: "100px 110px 50px" }}></img>
-      {/* <ClimbingBoxLoader
-        color={color}
-        loading={loading}
-        css={override}
-        size={20}
-      /> */}
       <div className="row">
         <form onSubmit={handleSubmit(submitCustomerLogin)}>
           <div className="row">
@@ -94,7 +74,6 @@ function Login(props) {
                   maxLength: 50,
                 })}
               />
-              {/* {errors.email && ("dkjfs")} */}
               <label htmlFor=" icon_prefix email">Email</label>
             </div>
           </div>
@@ -120,7 +99,7 @@ function Login(props) {
                 The username does not exist in the system. Would you like to
                 register?
               </span>
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">Password - 8 characters</label>
             </div>
           </div>
           <button className="btn waves-effect waves-light green" type="submit">
