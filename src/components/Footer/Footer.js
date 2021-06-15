@@ -38,7 +38,7 @@ function Footer() {
   }, []);
 
   return (
-    <nav className="nav-wrapper amber darken-1">
+    <nav className="footerzindex nav-wrapper amber darken-1">
       <ul className="nav-mobile ">
         <li>
           <Link to="/">
