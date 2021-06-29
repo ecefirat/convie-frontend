@@ -7,7 +7,7 @@ import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 
 const override = css`
   display: block;
-  margin: 35vh auto 5vh;
+  margin: 20vh auto 5vh;
   border-color: red;
 `;
 
@@ -97,9 +97,9 @@ function History() {
   };
 
   return (
-    <div style={{ marginBottom: 70 }}>
+    <div>
       {history.length > 0 ? (
-        <div>
+        <div style={{ marginBottom: 70 }}>
           <h2 className="header">Order History</h2>
           <p>Customer Name: {customer_name}</p>
           <p>Customer Number: {customer_id}</p>
@@ -115,12 +115,18 @@ function History() {
           })}
         </div>
       ) : (
-        <ClimbingBoxLoader
-          color={color}
-          loading={loading}
-          css={override}
-          size={20}
-        />
+        <>
+          <p style={{ marginTop: "7vh" }}>
+            Start shopping
+            <p> to see your shopping history...</p>
+          </p>
+          <ClimbingBoxLoader
+            color={color}
+            loading={loading}
+            css={override}
+            size={20}
+          />
+        </>
       )}
     </div>
   );

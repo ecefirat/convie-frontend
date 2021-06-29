@@ -28,11 +28,10 @@ export default function Upload() {
     uploadImage(preview);
   };
 
-  const uploadImage = (e) => {
-    console.log(e);
-    fetch("/uploadss", {
+  const uploadImage = (imgString) => {
+    fetch(process.env.REACT_APP_URL + "/api", {
       method: "POST",
-      body: JSON.stringify(),
+      body: JSON.stringify({ data: imgString }),
       headers: {
         "Content-Type": "application/json",
       },

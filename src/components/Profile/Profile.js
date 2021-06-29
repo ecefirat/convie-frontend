@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
 import Upload from "../Uploads/Uploads";
+import { Image } from "cloudinary-react";
 
 import { css } from "@emotion/core";
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
@@ -25,6 +26,7 @@ function Profile() {
   const [customer_email, setCustomerEmail] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [fileTypeError, setFileTypeError] = useState(false);
+  const [imageIds, setImageIds] = useState();
 
   useEffect(() => {
     fetch(process.env.REACT_APP_URL + "/sessionInfo", {
@@ -125,6 +127,21 @@ function Profile() {
       }
     });
   };
+
+  const loadImages = async () => {
+    try {
+      const res = await fetch(process.env.REACT_APP_URL + "/api/images");
+      const data = await res.json();
+      console.log(data);
+      setImageIds(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    loadImages();
+  }, []);
 
   const deleteAccount = (data) => {
     fetch(process.env.REACT_APP_URL + "/account", {
@@ -242,7 +259,7 @@ function Profile() {
           />
           <h5>Change Profile Picture</h5>
           <Upload></Upload>
-          <input
+          {/* <input
             type="file"
             name="picture"
             accept=".jpeg"
@@ -254,7 +271,7 @@ function Profile() {
             style={{ marginBottom: 10, display: "block" }}
             onClick={handleSubmit(uploadImage)}>
             upload
-          </button>
+          </button> */}
           {fileTypeError ? <span>Please upload .jpeg file.</span> : null}
           {imagePath ? (
             <>
