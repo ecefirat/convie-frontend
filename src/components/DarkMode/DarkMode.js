@@ -42,10 +42,6 @@ const DarkMode = () => {
         <span className="lever"></span>
       </label>
     </div>
-    /* <button
-      className={theme === "dark" ? clicked : unClicked}
-      id="darkMode"
-      onClick={(e) => switchTheme(e)}></button> */
   );
 };
 

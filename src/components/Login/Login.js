@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import "./Login.css";
 
 function Login(props) {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -10,9 +9,12 @@ function Login(props) {
   let history = useHistory();
   const { register, handleSubmit } = useForm();
 
+  const [loginError, setLoginError] = useState("");
+  const [notExists, setNotExists] = useState("");
+
   const submitCustomerLogin = (data) => {
-    console.log(data);
-    console.log("login data");
+    // console.log(data);
+    //     console.log("login data");
     fetch(process.env.REACT_APP_URL + "/login", {
       method: "POST",
       body: JSON.stringify(data),
@@ -24,19 +26,22 @@ function Login(props) {
       .then((res) => res)
       .then((res) => {
         if (res.status === 404) {
-          document.getElementById("notExists").style.display = "block";
+          setNotExists(`The username does not exist in the system. Would you like to
+          register?`);
         }
         if (res.status === 401) {
-          document.getElementById("loginError").style.display = "block";
+          setLoginError(`Your password and/or email is not correct. Your password should
+          contain at least one number, one upper case and one lower case
+          letter and must be 8 characters long.`);
         }
         if (res.status === 200) {
-          console.log(res.status);
+          // console.log(res.status);
           res.json().then((data) => {
-            console.log(data.user.role);
-            console.log("above");
-            console.log(loggedIn);
+            // console.log(data.user.role);
+            // console.log("above");
+            // console.log(loggedIn);
             setLoggedIn(true);
-            console.log(loggedIn);
+            // console.log(loggedIn);
             localStorage.setItem("loggedIn", true);
             if (data.user.role === "admin") {
               document.getElementById("adminIcon").style.display = "block";
@@ -90,15 +95,8 @@ function Login(props) {
                   pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
                 })}
               />
-              <span id="loginError">
-                Your password and/or email is not correct. Your password should
-                contain at least one number, one upper case and one lower case
-                letter and must be 8 characters long.
-              </span>
-              <span id="notExists">
-                The username does not exist in the system. Would you like to
-                register?
-              </span>
+              <span>{loginError}</span>
+              <span>{notExists}</span>
               <label htmlFor="password">Password - 8 characters</label>
             </div>
           </div>

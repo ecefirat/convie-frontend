@@ -1,13 +1,17 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
+import { useState } from "react/cjs/react.development";
 
 function Register(props) {
   let history = useHistory();
   const { register, handleSubmit, errors } = useForm();
 
+  const [exists, setExists] = useState("");
+  const [matchMsg, setMatchMsg] = useState("");
+
   const submitCustomerRegistration = (data) => {
-    console.log(data);
+    // console.log(data);
     if (passwordCheck()) {
       fetch(process.env.REACT_APP_URL + "/register", {
         method: "POST",
@@ -16,20 +20,19 @@ function Register(props) {
           "Content-Type": "application/json",
         },
       }).then((res) => {
-        console.log("blab");
         if (res.status === 404) {
           history.push("/login");
         }
         if (res.status === 409) {
-          document.getElementById("existsError").style.display = "block";
+          setExists(`User exists, please sign up with a different address.`);
         }
         if (res.status === 200) {
           history.push("/");
         }
-        console.log(res.status);
+        // console.log(res.status);
         res.json().then((data) => {
-          console.log(data);
-          console.log("this one");
+          // console.log(data);
+          // console.log("this one");
         });
       });
     }
@@ -38,13 +41,12 @@ function Register(props) {
   const passwordCheck = (e) => {
     const pw = document.getElementById("password").value;
     const cpw = document.getElementById("confirmPassword").value;
-    console.log(pw);
-    console.log(cpw);
+    // console.log(pw);
+    // console.log(cpw);
     if (pw !== cpw) {
-      document.getElementById("confirmError").innerHTML =
-        "Passwords don't match.";
+      setMatchMsg("Passwords don't match.");
     } else {
-      document.getElementById("confirmError").innerHTML = "Passwords match.";
+      setMatchMsg("Passwords match.");
       return true;
     }
   };
@@ -115,9 +117,7 @@ function Register(props) {
               })}
             />
             {errors.email && <span>Please enter a valid email address.</span>}
-            <span id="existsError" style={{ display: "none" }}>
-              User exists, please sign up with a different address.
-            </span>
+            <span>{exists}</span>
             <label htmlFor=" icon_prefix email">Email</label>
           </div>
         </div>
@@ -157,7 +157,7 @@ function Register(props) {
                 pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
               })}
             />
-            <span id="confirmError"></span>
+            <span>{matchMsg}</span>
             <label htmlFor="password">Confirm Password</label>
           </div>
         </div>

@@ -12,7 +12,6 @@ function Users(props) {
   const { register, handleSubmit } = useForm();
 
   const changeUName = (data) => {
-    console.log(data);
     fetch(process.env.REACT_APP_URL + "/uName", {
       method: "POST",
       body: JSON.stringify({ data, customer_id: user.customer_id }),
@@ -22,20 +21,20 @@ function Users(props) {
       credentials: "include",
     }).then((res) => {
       if (res.status === 404) {
-        console.log("cant change pname");
+        // console.log("cant change pname");
       } else if (res.status === 200) {
         res.json().then((data) => {
-          console.log(data);
+          // console.log(data);
           setPName(data.message);
-          console.log("pname above");
           setMessage(true);
-          console.log(msg);
+          // console.log(msg);
         });
       }
     });
   };
 
   const promoteUser = () => {
+    //implement user role promotion
     console.log(uRole);
   };
 
@@ -49,11 +48,11 @@ function Users(props) {
       credentials: "include",
     }).then((res) => {
       if (res.status === 404) {
-        console.log("cant delete user");
+        // console.log("cant delete user");
       } else if (res.status === 200) {
         res.json().then((data) => {
-          console.log("deleted");
-          console.log(data.user_id);
+          // console.log("deleted");
+          // console.log(data.user_id);
           setDeleteMsg(true);
         });
       }

@@ -21,10 +21,7 @@ function Footer() {
             document.getElementById("loginError").style.display = "block";
           }
           if (res.status === 200) {
-            console.log(res.status);
             res.json().then((data) => {
-              console.log(data.user.role);
-              console.log("above");
               if (data.user.role === "admin") {
                 document.getElementById("adminIcon").style.display = "block";
               }

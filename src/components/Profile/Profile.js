@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
+import Upload from "../Uploads/Uploads";
 
 import { css } from "@emotion/core";
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
@@ -45,7 +46,6 @@ function Profile() {
         });
       } else if (res.status === 400) {
         res.json().then((data) => {
-          console.log(data);
           history.push("login");
         });
       }
@@ -53,8 +53,8 @@ function Profile() {
   }, []);
 
   const handleAddress = (data) => {
-    console.log(data);
-    console.log("handleaddress");
+    // console.log(data);
+    // console.log("handleaddress");
     fetch(process.env.REACT_APP_URL + "/customerAddress", {
       method: "POST",
       body: JSON.stringify(data),
@@ -64,13 +64,13 @@ function Profile() {
       credentials: "include",
     }).then((res) => {
       if (res.status === 404) {
-        console.log("couldnt change");
+        // console.log("couldnt change");
       }
       if (res.status === 200) {
         res.json().then((data) => {
-          console.log(data);
+          // console.log(data);
           setCustomerAddress(data.message);
-          console.log("address above");
+          // console.log("address above");
         });
       }
     });
@@ -79,7 +79,7 @@ function Profile() {
   const uploadImage = async (data) => {
     const formData = new FormData();
     formData.append("picture", data.picture[0]);
-    console.log(formData);
+    // console.log(formData);
 
     fetch(process.env.REACT_APP_URL + "/picture", {
       method: "POST",
@@ -88,15 +88,14 @@ function Profile() {
     }).then((res) => {
       if (res.status === 415) {
         setFileTypeError(true);
-        console.log(fileTypeError);
+        // console.log(fileTypeError);
       }
       if (res.status === 200) {
         setFileTypeError(false);
         res.json().then((data) => {
-          console.log(data);
+          // console.log(data);
           const newImagePath =
             process.env.REACT_APP_URL + "/uploads" + "/" + data.picture.name;
-          console.log(newImagePath);
           setImagePath(newImagePath);
         });
       }
@@ -105,8 +104,8 @@ function Profile() {
 
   const changeImage = (data) => {
     setProfilePicture(data.profile_picture);
-    console.log(data);
-    console.log("changeimage");
+    // console.log(data);
+    // console.log("changeimage");
     fetch(process.env.REACT_APP_URL + "/uploads", {
       method: "POST",
       body: JSON.stringify(data),
@@ -116,12 +115,12 @@ function Profile() {
       credentials: "include",
     }).then((res) => {
       if (res.status === 404) {
-        console.log("couldnt change");
+        // console.log("couldnt change");
       }
       if (res.status === 200) {
         res.json().then((data) => {
-          console.log(data);
-          console.log("imagepath above");
+          // console.log(data);
+          // console.log("imagepath above");
         });
       }
     });
@@ -140,8 +139,9 @@ function Profile() {
         console.log("can't delete");
       } else if (res.status === 200) {
         res.json().then((data) => {
-          console.log(data);
-          console.log("account deleted");
+          // console.log(data);
+          // console.log("account deleted");
+          handleLogout();
           history.push("/login");
         });
       }
@@ -184,12 +184,17 @@ function Profile() {
             </i>
           </Link>
           <img
-            src={profile_picture}
+            src={
+              profile_picture === null
+                ? "../../../images/defaultPicture.jpeg"
+                : profile_picture
+            }
             style={{ display: "block" }}
             alt="img"
             width="120px"
             height="120px"
           />
+
           <h5>Edit Address</h5>
           <p>{customer_address}</p>
           <input
@@ -236,6 +241,7 @@ function Profile() {
             })}
           />
           <h5>Change Profile Picture</h5>
+          <Upload></Upload>
           <input
             type="file"
             name="picture"

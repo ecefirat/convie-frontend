@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import DarkMode from "../DarkMode/DarkMode";
 
-function Header(props) {
+function Header() {
   return (
     <nav>
       <div className="nav-wrapper navbar-fixed amber darken-1">

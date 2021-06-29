@@ -10,7 +10,7 @@ function AdminProducts(props) {
   const { register, handleSubmit } = useForm();
 
   const changePName = (data) => {
-    console.log(data);
+    // console.log(data);
     fetch(process.env.REACT_APP_URL + "/pName", {
       method: "POST",
       body: JSON.stringify({ data, pID: product.pID }),
@@ -20,14 +20,14 @@ function AdminProducts(props) {
       credentials: "include",
     }).then((res) => {
       if (res.status === 404) {
-        console.log("cant change pname");
+        // console.log("cant change pname");
       } else if (res.status === 200) {
         res.json().then((data) => {
-          console.log(data);
+          // console.log(data);
           setPName(data.message);
-          console.log("pname above");
+          // console.log("pname above");
           setMessage(true);
-          console.log(msg);
+          // console.log(msg);
         });
       }
     });
@@ -43,11 +43,11 @@ function AdminProducts(props) {
       credentials: "include",
     }).then((res) => {
       if (res.status === 404) {
-        console.log("cant delete products");
+        // console.log("cant delete products");
       } else if (res.status === 200) {
         res.json().then((data) => {
-          console.log("deleted");
-          console.log(data.pName);
+          // console.log("deleted");
+          // console.log(data.pName);
           setDeleteMsg(`Product ${data.pName} is deleted.`);
         });
       }

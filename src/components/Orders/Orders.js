@@ -18,12 +18,10 @@ export const Orders = (props) => {
     }).then((res) => {
       if (res.status === 200) {
         res.json().then((data) => {
-          console.log(data);
           setCustomer(data.user.customer_name);
         });
       } else if (res.status === 400) {
         res.json().then((data) => {
-          console.log(data);
           history.push("/");
         });
       }

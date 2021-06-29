@@ -33,12 +33,12 @@ const Admin = (props) => {
         .then((res) => {
           if (res.status === 200) {
             res.json().then((data) => {
-              console.log(data);
+              // console.log(data);
               setLoggedIn(true);
             });
           } else if (res.status === 400) {
             res.json().then((data) => {
-              console.log(data);
+              // console.log(data);
               history.push("/login");
             });
           }
@@ -49,25 +49,26 @@ const Admin = (props) => {
     fetchSes();
   }, []);
 
-  useEffect(() => {
-    fetch(process.env.REACT_APP_URL + "/onlyAdmin", {
-      method: "GET",
-      body: JSON.stringify(),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    }).then((res) => {
-      console.log(res);
-      if (res.status === 403) {
-        history.push("/login");
-      } else if (res.status === 200) {
-        res.json().then((data) => {
-          setWelcomeMsg("Welcome to the admin panel");
-        });
-      }
-    });
-  }, []);
+  // //ip whitelist for admin panel is disabled for live site
+  // useEffect(() => {
+  //   fetch(process.env.REACT_APP_URL + "/onlyAdmin", {
+  //     method: "GET",
+  //     body: JSON.stringify(),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     credentials: "include",
+  //   }).then((res) => {
+  //     console.log(res);
+  //     if (res.status === 403) {
+  //       history.push("/login");
+  //     } else if (res.status === 200) {
+  //       res.json().then((data) => {
+  //         setWelcomeMsg("Welcome to the admin panel");
+  //       });
+  //     }
+  //   });
+  // }, []);
 
   useEffect(() => {
     async function fetchAPI() {
@@ -82,15 +83,15 @@ const Admin = (props) => {
         .then((res) => {
           if (res.status === 400) {
             res.json().then((data) => {
-              console.log(data);
-              console.log("users info error");
+              // console.log(data);
+              // console.log("users info error");
             });
           } else if (res.status === 200) {
             res.json().then((data) => {
               setUsers(data.users);
               setLoaded(true);
-              console.log(data);
-              console.log("users info");
+              // console.log(data);
+              // console.log("users info");
             });
           }
         })
@@ -112,15 +113,15 @@ const Admin = (props) => {
       .then((res) => {
         if (res.status === 405) {
           res.json().then((data) => {
-            console.log(data);
-            console.log("this is products data /error 405");
+            // console.log(data);
+            // console.log("this is products data /error 405");
           });
         } else if (res.status === 200) {
           res.json().then((data) => {
             setProducts(data.prod);
             setLoaded(true);
-            console.log(data);
-            console.log("this is products data");
+            // console.log(data);
+            // console.log("this is products data");
           });
         }
       })
@@ -129,7 +130,7 @@ const Admin = (props) => {
   }, []);
 
   const addProduct = (data) => {
-    console.log(data);
+    // console.log(data);
     fetch(process.env.REACT_APP_URL + "/addProduct", {
       method: "POST",
       body: JSON.stringify(data),
@@ -139,13 +140,13 @@ const Admin = (props) => {
       credentials: "include",
     }).then((res) => {
       if (res.status === 400) {
-        console.log("cant add product");
+        // console.log("cant add product");
       } else if (res.status === 409) {
         setExistsMsg(`${data.pName} already exists.`);
       } else if (res.status === 200) {
         res.json().then((data) => {
-          console.log(data);
-          console.log("added");
+          // console.log(data);
+          // console.log("added");
           setProductMsg(`Product ${data.pName} is added as a new product.`);
         });
       }
@@ -153,7 +154,7 @@ const Admin = (props) => {
   };
 
   const addAdmin = (data) => {
-    console.log(data);
+    // console.log(data);
     fetch(process.env.REACT_APP_URL + "/addAdmin", {
       method: "POST",
       body: JSON.stringify(data),
@@ -163,13 +164,13 @@ const Admin = (props) => {
       credentials: "include",
     }).then((res) => {
       if (res.status === 400) {
-        console.log("cant add admin");
+        // console.log("cant add admin");
       } else if (res.status === 409) {
         setExistMsg("This admin already exists in the system.");
       } else if (res.status === 200) {
         res.json().then((data) => {
-          console.log(data);
-          console.log("added");
+          // console.log(data);
+          // console.log("added");
           setAdminMsg(`User ${data.admin} is added as admin.`);
         });
       }

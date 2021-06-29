@@ -21,6 +21,7 @@ function History() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [history, setHistory] = useState([]);
   const [customer_id, setCustomerId] = useState("");
+  const [delOrder, setDelOrder] = useState("");
 
   useEffect(() => {
     fetch(process.env.REACT_APP_URL + "/sessionInfo", {
@@ -33,14 +34,14 @@ function History() {
     }).then((res) => {
       if (res.status === 200) {
         res.json().then((data) => {
-          console.log(data);
+          // console.log(data);
           setCustomerName(data.user.customer_name);
           setCustomerId(data.user.customer_id);
           setLoggedIn(true);
         });
       } else if (res.status === 400) {
         res.json().then((data) => {
-          console.log(data);
+          // console.log(data);
           historyPush.push("/login");
         });
       }
@@ -59,14 +60,14 @@ function History() {
       .then((res) => {
         if (res.status === 405) {
           res.json().then((data) => {
-            console.log(data);
+            // console.log(data);
             console.log("this is products data /error 405");
           });
         } else if (res.status === 200) {
           res.json().then((data) => {
             setHistory(data.history);
-            console.log(data);
-            console.log("history data");
+            // console.log(data);
+            // console.log("history data");
           });
         }
       })
@@ -75,8 +76,6 @@ function History() {
   }, [customer_id]);
 
   const deleteOrder = (data) => {
-    console.log(data);
-    console.log("deleteorder");
     fetch(process.env.REACT_APP_URL + "/orders", {
       method: "POST",
       body: JSON.stringify(data),
@@ -86,14 +85,12 @@ function History() {
       credentials: "include",
     }).then((res) => {
       if (res.status === 400) {
-        console.log("can't delete");
+        // console.log("can't delete");
       } else if (res.status === 200) {
         res.json().then((data) => {
-          console.log(data.order_id);
-          console.log("order details are deleted");
-          document.getElementById(
-            "deleteOrder"
-          ).innerHTML = `Order ${data.order_id} is deleted.`;
+          // console.log(data.order_id);
+          // console.log("order details are deleted");
+          setDelOrder(`Order ${data.order_id} is deleted.`);
         });
       }
     });
@@ -106,7 +103,7 @@ function History() {
           <h2 className="header">Order History</h2>
           <p>Customer Name: {customer_name}</p>
           <p>Customer Number: {customer_id}</p>
-          <p id="deleteOrder" style={{ color: "red" }}></p>
+          <p style={{ color: "red" }}>{delOrder}</p>
           {history.map((order) => {
             return (
               <HistoryDetails

@@ -32,7 +32,6 @@ function Main(props) {
   const [customer_id, setCustomerId] = useState("");
   const [customer_address, setCustomerAddress] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
-  console.log(process.env.REACT_APP_URL + "/sessionInfo");
 
   useEffect(() => {
     const req = fetch(process.env.REACT_APP_URL + "/sessionInfo", {
@@ -45,7 +44,6 @@ function Main(props) {
     }).then((res) => {
       if (res.status === 200) {
         res.json().then((data) => {
-          console.log(data);
           setCustomer(data.user.customer_name);
           setCustomerId(data.user.customer_id);
           setCustomerAddress(data.user.customer_address);
@@ -53,7 +51,7 @@ function Main(props) {
         });
       } else if (res.status === 400) {
         res.json().then((data) => {
-          console.log(data);
+          // console.log(data);
           history.push("/login");
         });
       }
@@ -74,15 +72,13 @@ function Main(props) {
         .then((res) => {
           if (res.status === 405) {
             res.json().then((data) => {
-              console.log(data);
-              console.log("this is products data /error 405");
+              // console.log(data);
+              // console.log("this is products data /error 405");
             });
           } else if (res.status === 200) {
             res.json().then((data) => {
               setProducts(data.prod);
               setLoaded(true);
-              console.log(data);
-              console.log("this is products data");
             });
           }
         })
@@ -111,15 +107,12 @@ function Main(props) {
       credentials: "include",
     })
       .then((res) => {
-        console.log(res);
-        console.log("first");
         if (res.status === 400) {
           res.json().then((data) => {
-            console.log(data);
+            // console.log(data);
           });
         } else if (res.status === 200) {
           res.json().then((data) => {
-            console.log(data);
             setCart([]);
             history.push("/orders");
           });
@@ -169,7 +162,7 @@ function Main(props) {
       });
       let totals = prices.reduce((acc, cur) => acc + cur);
       setTotal(totals.toFixed(2));
-      console.log(totals.toFixed(2));
+      // console.log(totals.toFixed(2));
       return total;
     }
   };

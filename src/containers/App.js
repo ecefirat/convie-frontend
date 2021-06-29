@@ -32,7 +32,7 @@ function App(props) {
             <Route path="/admin" component={Admin}></Route>
             <Route path="/help" component={Help}></Route>
             <Route path="/" component={Main}></Route>
-            {/* <Route component={NotFoundPage} /> */}
+            {/* implement <Route component={NotFoundPage} /> */}
           </Switch>
         </div>
         <Footer />
