@@ -5,7 +5,7 @@ function Product(props) {
   return (
     <div className="col s4 m2 l2" key={product.pID}>
       <div className="card">
-        <div className="card-image">
+        <div className="card-image" style={{ height: 225 }}>
           <img src={product.pImage} alt={product.pName} />
           <button
             className="btn-floating halfway-fab waves-effect waves-light green"

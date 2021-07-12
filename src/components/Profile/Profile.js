@@ -24,9 +24,10 @@ function Profile() {
   const [imagePath, setImagePath] = useState("");
   const [profile_picture, setProfilePicture] = useState("");
   const [customer_email, setCustomerEmail] = useState("");
+  const [customer_id, setCustomerId] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [fileTypeError, setFileTypeError] = useState(false);
-  const [imageIds, setImageIds] = useState();
+  const [imageId, setImageId] = useState();
 
   useEffect(() => {
     fetch(process.env.REACT_APP_URL + "/sessionInfo", {
@@ -43,6 +44,7 @@ function Profile() {
           setCustomerName(data.user.customer_name);
           setProfilePicture(data.user.profile_picture);
           setCustomerEmail(data.user.customer_email);
+          setCustomerId(data.user.customer_id);
           setLoggedIn(true);
           history.push("/profile");
         });
@@ -128,20 +130,57 @@ function Profile() {
     });
   };
 
-  const loadImages = async () => {
-    try {
-      const res = await fetch(process.env.REACT_APP_URL + "/api/images");
-      const data = await res.json();
-      console.log(data);
-      setImageIds(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
-    loadImages();
+    const req = fetch(process.env.REACT_APP_URL + "/api/images", {
+      method: "POST",
+      body: JSON.stringify(),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    })
+      .then((res) => {
+        if (res.status === 405) {
+          res.json().then((data) => {
+            console.log(data);
+            console.log("this is products data /error 405");
+          });
+        } else if (res.status === 200) {
+          res.json().then((data) => {
+            setImageId(data.imgid);
+            console.log(data.imgid);
+          });
+        }
+      })
+      .catch((error) => console.log(error));
+    return req;
   }, []);
+
+  // const loadImages = async () => {
+  //   const res = await fetch(process.env.REACT_APP_URL + "/api/images", {
+  //     method: "POST",
+  //     body: JSON.stringify(),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     credentials: "include",
+  //   })
+  //     .then((res) => {
+  //       if (res.status === 200) {
+  //         res.json().then((data) => {
+  //           console.log(data);
+  //         });
+  //       } else {
+  //         console.log("error");
+  //       }
+  //     })
+  //     .catch((error) => console.log(`whay ${error}`));
+  //   return res;
+  // };
+
+  // useEffect(() => {
+  //   loadImages();
+  // }, []);
 
   const deleteAccount = (data) => {
     fetch(process.env.REACT_APP_URL + "/account", {
@@ -200,7 +239,7 @@ function Profile() {
               help
             </i>
           </Link>
-          <img
+          {/* <img
             src={
               profile_picture === null
                 ? "../../../images/defaultPicture.jpeg"
@@ -211,6 +250,14 @@ function Profile() {
             width="120px"
             height="120px"
           />
+ */}
+          {imageId && (
+            <Image
+              cloudName="ecefr"
+              publicId={imageId}
+              style={{ display: "block" }}
+            />
+          )}
 
           <h5>Edit Address</h5>
           <p>{customer_address}</p>
